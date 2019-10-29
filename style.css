@@ -1,1 +1,46 @@
 /* all of our CSS goes here */
+
+.hide {
+    display: none;
+}
+
+#bigBniaLogo {
+    margin-left: 1em;
+    margin-top: 90%;
+}
+
+#onboarding {
+    height: 100vh;
+    background-color: #343a40;
+    color: white;
+    padding: 2em 2.5em;
+}
+
+#instructionsTitle {
+    text-align: center;
+    margin-top: 2.5em;
+    margin-bottom: 2em;
+}
+
+ol {
+    padding-left: 20px;
+}
+
+#gotItBtn {
+    width: 100%;
+    margin-top: 2em;
+}
+
+.iconBtn {
+    font-size: 16pt;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.iconBtn:hover {
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}
+
+.iconBtn:active {
+    color: rgba(255, 255, 255, 1.0);
+}

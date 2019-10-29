@@ -14,16 +14,31 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a0442ba428.js" crossorigin="anonymous"></script>
     <script src="bnia.js"></script>
 </head>
 <body>
 
     <!-- loading screen -->
-    <div id="loading">
+    <div id="loading" class="container-fluid">
+        <img id="bigBniaLogo" src="bnia-logo.png" width="auto" alt="bnia-logo">
     </div>
 
     <!-- onboarding screen -->
-    <div id="onboarding">
+    <div id="onboarding" class="container-fluid">
+        <div class="iconBtn float-right" onclick="showContentPage()">
+            <i class="fas fa-times"></i>
+        </div>
+        <div>
+            <h4 id="instructionsTitle">How to use</h4>
+            <ol>
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed.</li>
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed.</li>
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed.</li>
+                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed.</li>
+            </ol>
+        </div>
+        <button id="gotItBtn" class="btn btn-primary" onclick="showContentPage()">Got it!</button>
     </div>
 
     <!-- main content screen -->
@@ -33,7 +48,13 @@
             <a class="navbar-brand" href="#">
                 <img src="https://bniajfi.org/wp-content/uploads/2014/04/bnia_logo_new.png" width="auto" height="40" alt="bnia-logo">
             </a>
+            <span class="iconBtn navbar-text ml-auto" onclick="showOnboardingPage()">
+                <i class="far fa-question-circle"></i>
+            </form>
         </nav>
+        <!-- the rest -->
+        <div class="container-fluid">
+        </div>
     </div>
 
 </body>

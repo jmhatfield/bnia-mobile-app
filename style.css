@@ -11,7 +11,7 @@
 
 #onboarding {
     height: 100vh;
-    background-color: #343a40;
+    background-color: steelblue;
     color: white;
     padding: 2em 2.5em;
 }
@@ -43,4 +43,8 @@ ol {
 
 .iconBtn:active {
     color: rgba(255, 255, 255, 1.0);
+}
+
+.bg-dark {
+    background-color: steelblue !important;
 }

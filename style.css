@@ -48,3 +48,27 @@ ol {
 .bg-dark {
     background-color: steelblue !important;
 }
+
+#onboardingCarousel {
+    height: 100%;
+}
+
+.selectContainer {
+    margin-top: 0.75em;
+}
+
+.bootstrap-select .dropdown-menu {
+    max-width: 80%;
+}
+
+#mapid {
+    height: 375px;
+}
+
+table {
+    table-layout: fixed;
+}
+
+table td {
+    word-wrap: break-word;
+}

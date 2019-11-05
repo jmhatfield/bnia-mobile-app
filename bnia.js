@@ -11,6 +11,8 @@ $(document).ready(function() {
     addIndicatorOptions();
     addNeighborhoodOptions();
 
+    setupMap();
+    setupTable();
 });
 
 function showLoadingPage() {
@@ -115,5 +117,34 @@ function addNeighborhoodOptions() {
     neighborhoods.forEach(function(ele) {
         optionsHTML += "<option>" + ele + "</option>";
     });
-    $("#neighborhoodSelect").html(optionsHTML);
+    $("#neighborhoodSelect1").html(optionsHTML);
+    $("#neighborhoodSelect2").html(optionsHTML);
+}
+
+function showMapContent() {
+    $("#mapContent").removeClass("hide");
+    $("#listContent").addClass("hide");
+}
+
+function showListContent() {
+    $("#mapContent").addClass("hide");
+    $("#listContent").removeClass("hide");
+}
+
+function setupMap() {
+    var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+    mymap.removeControl(mymap.zoomControl);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    	maxZoom: 18,
+    	id: 'mapbox.streets',
+    	accessToken: 'pk.eyJ1Ijoiam1oYXRmaWVsZCIsImEiOiJjazJnbjlpbjUwMHg1M2JxZWR2aHQ2cjkyIn0.hI5VG7I0cGyKhFN_yBUhiQ'
+    }).addTo(mymap);
+}
+
+function setupTable() {
+    let html = "";
+    neighborhoods.forEach(function(ele) {
+        html += "<tr><td>" + ele + "</td><td>temp</td></tr>";
+    });
+    $("#tableBody").html(html);
 }

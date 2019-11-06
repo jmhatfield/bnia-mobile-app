@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/style.css"/>
 
     <!-- link to JS here -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/a0442ba428.js" crossorigin="anonymous"></script>
@@ -22,6 +22,8 @@
     <script src="js/bnia.js"></script>
     <script src="js/indicator-data.js"></script>
     <script src="js/neighborhoods.js"></script>
+    <script src="js/boundaries.js"></script>
+
 </head>
 <body>
 
@@ -43,19 +45,24 @@
             </ul>
             <div class="carousel-inner">
                 <div class="carousel-item active">
+                    BNIA is dedicated to providing indicators...
+                </div>
+                <div class="carousel-item">
+                    Use this app to compare indicator data between neighborhoods...
+                </div>
+                <div class="carousel-item">
                     <div>
                         <h4 id="instructionsTitle">How to use</h4>
                         <ol>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed.</li>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed.</li>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed.</li>
-                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed.</li>
+                            <li>Search for the indicator you're interested in, for example, "crime"</li>
+                            <li>Select the indicator that best fits your search</li>
+                            <li>Select which year you want to view data from</li>
+                            <li>You can view the data in either a map or a list</li>
+                            <li>You can search for a specific neighborhood on the map or in the list</li>
                         </ol>
                     </div>
                     <button id="gotItBtn" class="btn btn-light" onclick="showContentPage()">Got it!</button>
                 </div>
-                <div class="carousel-item">test1</div>
-                <div class="carousel-item">test2</div>
             </div>
         </div>
     </div>
@@ -78,7 +85,7 @@
                 </select>
             </div>
             <div class="selectContainer">
-                <select class="selectpicker form-control" title="Choose a year">
+                <select id="yearSelect" class="selectpicker form-control" title="Choose a year">
                     <option>2017</option>
                     <option>2016</option>
                     <option>2015</option>

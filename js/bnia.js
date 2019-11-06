@@ -1,4 +1,9 @@
 // all of our JS goes here
+
+var fakeData;
+var indicatorIsSelected = false;
+var yearIsSelected = false;
+
 $(document).ready(function() {
     // Inital load
     showLoadingPage();
@@ -11,10 +16,27 @@ $(document).ready(function() {
     addIndicatorOptions();
     addNeighborhoodOptions();
 
-    let fakeData = generateFakeData();
+    setupMap();
+    setupTable();
 
-    setupMap(fakeData);
-    setupTable(fakeData);
+    $("#indicatorSelect").on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+        indicatorIsSelected = true;
+        if (yearIsSelected) {
+            populateData();
+        }
+    });
+    $("#yearSelect").on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+        yearIsSelected = true;
+        if (indicatorIsSelected) {
+            populateData();
+        }
+    });
+    $("#neighborhoodSelect1").on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+        focusMap(clickedIndex);
+    });
+    $("#neighborhoodSelect2").on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+        filterTable(clickedIndex);
+    });
 });
 
 function showLoadingPage() {
@@ -141,50 +163,49 @@ function generateFakeData() {
     return data;
 }
 
-function getColor(d) {
-	return d > 1000 ? '#800026' :
-	       d > 500  ? '#BD0026' :
-	       d > 200  ? '#E31A1C' :
-	       d > 100  ? '#FC4E2A' :
-	       d > 50   ? '#FD8D3C' :
-	       d > 20   ? '#FEB24C' :
-	       d > 10   ? '#FED976' :
-	                  '#FFEDA0';
-}
-
-function setupMap(fakeData) {
-    var mymap = L.map('mapid').setView([39.290, -76.612], 12);
-    mymap.removeControl(mymap.zoomControl);
+function setupMap() {
+    var map = L.map('mapid').setView([39.290, -76.612], 12);
+    map.removeControl(map.zoomControl);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     	maxZoom: 18,
     	id: 'mapbox.streets',
     	accessToken: 'pk.eyJ1Ijoiam1oYXRmaWVsZCIsImEiOiJjazJnbjlpbjUwMHg1M2JxZWR2aHQ2cjkyIn0.hI5VG7I0cGyKhFN_yBUhiQ'
-    }).addTo(mymap);
-
-    // var legend = L.control({position: 'bottomright'});
-    // legend.onAdd = function (mymap) {
-    //
-    // 	var div = L.DomUtil.create('div', 'info legend'),
-    // 		grades = [0, 10, 20, 50, 100, 200, 500, 1000],
-    // 		labels = [];
-    //
-    // 	// loop through our density intervals and generate a label with a colored square for each interval
-    // 	for (var i = 0; i < grades.length; i++) {
-    // 		div.innerHTML +=
-    // 			'<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-    // 			grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    // 	}
-    //
-    // 	return div;
-    // };
-    //
-    // legend.addTo(mymap);
+    }).addTo(map);
+    L.geoJson(boundaries).addTo(map);
 }
 
-function setupTable(fakeData) {
+function setupTable() {
+    let html = "";
+    neighborhoods.forEach(function(ele) {
+        html += "<tr><td>" + ele + "</td><td class='text-right'><i id='hashtag' class='fas fa-hashtag'></i></td></tr>";
+    });
+    $("#tableBody").html(html);
+}
+
+function updateMap(fakeData) {
+}
+
+function updateTable(fakeData) {
     let html = "";
     neighborhoods.forEach(function(ele) {
         html += "<tr><td>" + ele + "</td><td class='text-right'>" + fakeData[ele] + "</td></tr>";
     });
     $("#tableBody").html(html);
+}
+
+function focusMap(index) {
+    let neighborhood = neighborhood[index - 1];
+}
+
+function filterTable(index) {
+    let neighborhood = neighborhoods[index - 1];
+    let html = "";
+    html += "<tr><td>" + neighborhood + "</td><td class='text-right'>" + fakeData[neighborhood] + "</td></tr>";
+    $("#tableBody").html(html);
+}
+
+function populateData() {
+    fakeData = generateFakeData();
+    updateMap(fakeData);
+    updateTable(fakeData);
 }

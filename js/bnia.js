@@ -279,7 +279,7 @@ function updateTable(fakeData) {
 
 function focusMap(index) {
     map.closePopup();
-    let neighborhood = neighborhoods[index - 1];
+    let neighborhood = neighborhoods[index];
     geojson.eachLayer(function(layer) {
         if (layer.feature.properties.Community === neighborhood) {
             if (fakeData) {
@@ -300,7 +300,7 @@ function focusMap(index) {
 }
 
 function filterTable(index) {
-    let neighborhood = neighborhoods[index - 1];
+    let neighborhood = neighborhoods[index];
     let html = "";
     if (fakeData) {
         html += "<tr><td>" + neighborhood + "</td><td class='text-right'>" + fakeData[neighborhood] + "</td></tr>";

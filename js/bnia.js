@@ -188,7 +188,7 @@ function style(feature) {
 
 function dataStyle(feature) {
     let dataStyle = {
-        fillColor: getColor(fakeData[feature.properties.Community]),
+        fillColor: getColor(fakeData[feature.properties.name]),
         weight: 3,
         opacity: 1,
         color: 'white',
@@ -233,7 +233,7 @@ function setupMap() {
         style: style,
         onEachFeature: onEachFeature
     }).bindPopup(function(layer) {
-        let neighborhood = layer.feature.properties.Community;
+        let neighborhood = layer.feature.properties.name;
         if (fakeData) {
             return "<strong>Neighborhood</strong><br/>" + neighborhood + '<br/><strong>Data</strong><br/>' + fakeData[neighborhood];
         } else {
@@ -248,7 +248,6 @@ function setupMap() {
         var grades = [0, 20, 40, 60, 80];
         var labels = [];
         for (let i = 0; i < grades.length; i++) {
-            console.log(getColor(grades[i] + 1));
             div.innerHTML += '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
                              (grades[i]+1) + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
         }
@@ -281,7 +280,7 @@ function focusMap(index) {
     map.closePopup();
     let neighborhood = neighborhoods[index];
     geojson.eachLayer(function(layer) {
-        if (layer.feature.properties.Community === neighborhood) {
+        if (layer.feature.properties.name === neighborhood) {
             if (fakeData) {
                 geojson.setStyle(dataStyle);
             } else {

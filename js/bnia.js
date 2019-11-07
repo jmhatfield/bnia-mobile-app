@@ -1,5 +1,5 @@
 /*
- * Many functions adapted from https://leafletjs.com/examples/choropleth/
+ * Some functions adapted from https://leafletjs.com/examples/choropleth/
  */
 
 var fakeData;

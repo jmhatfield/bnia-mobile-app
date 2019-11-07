@@ -1,5 +1,6 @@
-/* all of our CSS goes here */
-
+/*
+ * Some functions adapted from https://leafletjs.com/examples/choropleth/
+ */
 .hide {
     display: none;
 }

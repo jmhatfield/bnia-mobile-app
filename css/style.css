@@ -16,14 +16,16 @@
     padding: 2em 2.5em;
 }
 
-#instructionsTitle {
-    text-align: center;
-    margin-top: 1.5em;
+#onboardingCarousel {
+    margin-top: 4em;
+}
+
+h4 {
     margin-bottom: 1em;
 }
 
-ol {
-    padding-left: 20px;
+.carousel-indicators {
+    bottom: 4em;
 }
 
 #gotItBtn {
@@ -66,6 +68,10 @@ ol {
     height: 375px;
 }
 
+#neighborhoodSelect2 {
+    width: 80%;
+}
+
 table {
     table-layout: fixed;
 }
@@ -86,10 +92,11 @@ table td {
     opacity: 0.5;
 }
 
-/* .legend {
+.legend {
 	line-height: 18px;
 	color: #555;
 }
+
 .legend i {
 	width: 18px;
 	height: 18px;
@@ -97,15 +104,9 @@ table td {
 	margin-right: 8px;
 	opacity: 0.7;
 }
+
 .info {
-	padding: 6px 8px;
-	font: 14px/16px Arial, Helvetica, sans-serif;
 	background: white;
-	background: rgba(255,255,255,0.8);
-	box-shadow: 0 0 15px rgba(0,0,0,0.2);
 	border-radius: 5px;
+    padding: 5px;;
 }
-.info h4 {
-	margin: 0 0 5px;
-	color: #777;
-} */

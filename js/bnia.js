@@ -1,14 +1,16 @@
-// all of our JS goes here
+/*
+ * Many functions adapted from https://leafletjs.com/examples/choropleth/
+ */
 
 var fakeData;
 var indicatorIsSelected = false;
 var yearIsSelected = false;
+var map;
+var geojson;
 
 $(document).ready(function() {
-    // Inital load
     showLoadingPage();
 
-    // Change to onboarding
     setTimeout(function() {
         showOnboardingPage();
     }, 2000)
@@ -158,20 +160,99 @@ function showListContent() {
 function generateFakeData() {
     let data = {};
     neighborhoods.forEach(function(ele) {
-        data[ele] = Math.floor(Math.random() * 100);
+        data[ele] = Math.floor(Math.random() * 100) + 1;
     });
     return data;
 }
 
+function getColor(data) {
+    return data > 80 ? '#a63603' :
+	       data > 60 ? '#e6550d' :
+	       data > 40 ? '#fd8d3c' :
+	       data > 20 ? '#fdbe85' :
+	                   '#feedde';
+}
+
+function style(feature) {
+    let defaultStyle = {
+        fillColor: '#ffffff',
+        weight: 3,
+        opacity: 1,
+        color: 'white',
+        fillOpacity: 0
+    }
+    return defaultStyle;
+}
+
+function dataStyle(feature) {
+    let dataStyle = {
+        fillColor: getColor(fakeData[feature.properties.Community]),
+        weight: 3,
+        opacity: 1,
+        color: 'white',
+        fillOpacity: 0.7
+    }
+    return dataStyle;
+}
+
+
+function highlightNeighborhood(event) {
+    if (fakeData) {
+        geojson.setStyle(dataStyle);
+    } else {
+        geojson.setStyle(style);
+    }
+    let layer = event.target;
+    layer.setStyle({
+		weight: 5,
+		color: '#666',
+		fillOpacity: 0.7
+	});
+	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+		layer.bringToFront();
+	}
+}
+
+function onEachFeature(feature, layer) {
+    layer.on({
+        click: highlightNeighborhood
+    });
+}
+
 function setupMap() {
-    var map = L.map('mapid').setView([39.290, -76.612], 12);
+    map = L.map('mapid').setView([39.290, -76.612], 11);
     map.removeControl(map.zoomControl);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     	maxZoom: 18,
     	id: 'mapbox.streets',
     	accessToken: 'pk.eyJ1Ijoiam1oYXRmaWVsZCIsImEiOiJjazJnbjlpbjUwMHg1M2JxZWR2aHQ2cjkyIn0.hI5VG7I0cGyKhFN_yBUhiQ'
     }).addTo(map);
-    L.geoJson(boundaries).addTo(map);
+    geojson = L.geoJson(boundaries, {
+        style: style,
+        onEachFeature: onEachFeature
+    }).bindPopup(function(layer) {
+        let neighborhood = layer.feature.properties.Community;
+        if (fakeData) {
+            return "<strong>Neighborhood</strong><br/>" + neighborhood + '<br/><strong>Data</strong><br/>' + fakeData[neighborhood];
+        } else {
+            return "<strong>Neighborhood</strong><br/>" + neighborhood;
+        }
+    }).addTo(map);
+
+
+    var legend = L.control({position: 'bottomleft'});
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend');
+        var grades = [0, 20, 40, 60, 80];
+        var labels = [];
+        for (let i = 0; i < grades.length; i++) {
+            console.log(getColor(grades[i] + 1));
+            div.innerHTML += '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                             (grades[i]+1) + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        }
+        return div;
+    };
+    legend.addTo(map);
 }
 
 function setupTable() {
@@ -183,6 +264,7 @@ function setupTable() {
 }
 
 function updateMap(fakeData) {
+    geojson.setStyle(dataStyle);
 }
 
 function updateTable(fakeData) {
@@ -194,14 +276,55 @@ function updateTable(fakeData) {
 }
 
 function focusMap(index) {
-    let neighborhood = neighborhood[index - 1];
+    map.closePopup();
+    let neighborhood = neighborhoods[index - 1];
+    geojson.eachLayer(function(layer) {
+        if (layer.feature.properties.Community === neighborhood) {
+            if (fakeData) {
+                geojson.setStyle(dataStyle);
+            } else {
+                geojson.setStyle(style);
+            }
+            layer.setStyle({
+        		weight: 5,
+        		color: '#666',
+        		fillOpacity: 0.7
+        	});
+        	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        		layer.bringToFront();
+        	}
+        }
+    })
 }
 
 function filterTable(index) {
     let neighborhood = neighborhoods[index - 1];
     let html = "";
-    html += "<tr><td>" + neighborhood + "</td><td class='text-right'>" + fakeData[neighborhood] + "</td></tr>";
+    if (fakeData) {
+        html += "<tr><td>" + neighborhood + "</td><td class='text-right'>" + fakeData[neighborhood] + "</td></tr>";
+    } else {
+        html += "<tr><td>" + neighborhood + "</td><td class='text-right'><i id='hashtag' class='fas fa-hashtag'></i></td></tr>";
+    }
     $("#tableBody").html(html);
+}
+
+function unfocusMap() {
+    $('#neighborhoodSelect1').selectpicker('deselectAll');
+    map.closePopup();
+    if (fakeData) {
+        geojson.setStyle(dataStyle);
+    } else {
+        geojson.setStyle(style);
+    }
+}
+
+function unfilterTable() {
+    $('#neighborhoodSelect2').selectpicker('deselectAll');
+    if (fakeData) {
+        updateTable(fakeData);
+    } else {
+        setupTable();
+    }
 }
 
 function populateData() {

@@ -41,27 +41,19 @@
             <ul class="carousel-indicators">
                 <li data-target="#onboardingCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#onboardingCarousel" data-slide-to="1"></li>
-                <li data-target="#onboardingCarousel" data-slide-to="2"></li>
             </ul>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    BNIA is dedicated to providing indicators...
+                    <h4>About BNIA</h4>
+                    <p>Our goal is to strengthen Baltimore neighborhoods by providing meaningful, accurate, and open data at the community level.</p>
+                    <p>We produce <strong>indicators</strong> that "take the pulse" of Baltimore neighborhoods by measuring progress towards a better quality of life for all residents.</p>
                 </div>
                 <div class="carousel-item">
-                    Use this app to compare indicator data between neighborhoods...
-                </div>
-                <div class="carousel-item">
-                    <div>
-                        <h4 id="instructionsTitle">How to use</h4>
-                        <ol>
-                            <li>Search for the indicator you're interested in, for example, "crime"</li>
-                            <li>Select the indicator that best fits your search</li>
-                            <li>Select which year you want to view data from</li>
-                            <li>You can view the data in either a map or a list</li>
-                            <li>You can search for a specific neighborhood on the map or in the list</li>
-                        </ol>
-                    </div>
-                    <button id="gotItBtn" class="btn btn-light" onclick="showContentPage()">Got it!</button>
+                    <h4>How to use this app</h4>
+                    <p>Begin by selecting an indicator and a year to see the data for each neighborhood.</p>
+                    <p>Use the interactive map to learn more about a neighborhood.</p>
+                    <p>Switch to "List View" to view data for all neighborhoods at once.</p>
+                    <button id="gotItBtn" class="btn btn-success" onclick="showContentPage()">Got it!</button>
                 </div>
             </div>
         </div>
@@ -107,17 +99,19 @@
                 </label>
             </div>
             <div id="mapContent">
-                <div class="selectContainer">
-                    <select id="neighborhoodSelect1" class="selectpicker form-control" data-live-search="true" title="Search for a neighborhood">
+                <div class="selectContainer d-flex flex-row">
+                    <select id="neighborhoodSelect1" class="selectpicker form-control d-inline-flex" data-live-search="true" data-max-options="1" title="Search for a neighborhood" multiple>
                     </select>
+                    <button class="btn btn-light d-inline-flex ml-1" onclick="unfocusMap()">Clear</button>
                 </div>
                 <div id="mapid" class="selectContainer">
                 </div>
             </div>
             <div id="listContent">
-                <div class="selectContainer">
-                    <select id="neighborhoodSelect2" class="selectpicker form-control" data-live-search="true" title="Search for a neighborhood">
+                <div class="selectContainer d-flex flex-row">
+                    <select id="neighborhoodSelect2" class="selectpicker form-control d-inline-flex" data-live-search="true" data-max-options="1" title="Search for a neighborhood" multiple>
                     </select>
+                    <button class="btn btn-light d-inline-flex ml-1" onclick="unfilterTable()">Clear</button>
                 </div>
                 <table class="table selectContainer">
                     <thead>

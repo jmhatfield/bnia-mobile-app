@@ -18,6 +18,8 @@ $(document).ready(function() {
     addIndicatorOptions();
     addNeighborhoodOptions();
 
+    showMapContent();
+
     setupMap();
     setupTable();
 

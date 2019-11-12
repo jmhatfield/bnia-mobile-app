@@ -49,9 +49,11 @@
                 </div>
                 <div class="carousel-item">
                     <h4>How to use this app</h4>
-                    <p>Begin by selecting an indicator and a year to see the data for each neighborhood.</p>
-                    <p>Use the interactive map to learn more about a neighborhood.</p>
-                    <p>Switch to "List View" to view data for all neighborhoods at once.</p>
+                    <ol>
+                        <li>Begin by selecting an indicator and a year to see the data for each neighborhood.</li><br/>
+                        <li>Use the interactive map to learn more about a neighborhood.</li><br/>
+                        <li>Switch to "List View" to view data for all neighborhoods at once.</li>
+                    </ol>
                     <button id="gotItBtn" class="btn btn-success" onclick="showContentPage()">Got it!</button>
                 </div>
             </div>
@@ -71,12 +73,14 @@
         </nav>
         <!-- the rest -->
         <div class="container-fluid">
-            <div class="selectContainer">
-                <select id="indicatorSelect" class="selectpicker form-control" data-live-search="true" title="Search for an indicator">
+            <div class="selectContainer d-flex flex-row align-items-center">
+                <div class="d-inline-flex numbers mr-2"><strong>1.</strong></div>
+                <select id="indicatorSelect" class="selectpicker form-control d-inline-flex" data-live-search="true" title="Search for an indicator">
                 </select>
             </div>
-            <div class="selectContainer">
-                <select id="yearSelect" class="selectpicker form-control" title="Choose a year">
+            <div class="selectContainer d-flex flex-rows align-items-center">
+                <div class="d-inline-flex numbers mr-2"><strong>2.</strong></div>
+                <select id="yearSelect" class="selectpicker form-control d-inline-flex" title="Choose a year">
                     <option>2017</option>
                     <option>2016</option>
                     <option>2015</option>

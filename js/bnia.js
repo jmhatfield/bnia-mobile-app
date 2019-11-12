@@ -34,6 +34,7 @@ $(document).ready(function() {
         if (indicatorIsSelected) {
             populateData();
         }
+
     });
     $("#neighborhoodSelect1").on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
         focusMap(clickedIndex);

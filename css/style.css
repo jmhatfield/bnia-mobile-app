@@ -56,8 +56,16 @@ h4 {
     height: 100%;
 }
 
+.btn-success {
+    background: yellowgreen;
+}
+
 .selectContainer {
     margin-top: 0.75em;
+}
+
+.numbers {
+    color: yellowgreen;
 }
 
 .bootstrap-select .dropdown-menu {
@@ -109,5 +117,5 @@ table td {
 .info {
 	background: white;
 	border-radius: 5px;
-    padding: 5px;;
+    padding: 5px;
 }

@@ -101,6 +101,10 @@ table td {
     opacity: 0.5;
 }
 
+.leaflet-top, .leaflet-bottom {
+    z-index: 499;
+}
+
 .legend {
 	line-height: 18px;
 	color: #555;

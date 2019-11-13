@@ -7,6 +7,9 @@ var indicatorIsSelected = false;
 var yearIsSelected = false;
 var map;
 var geojson;
+var info;
+var selectedIndicator;
+var selectedYear;
 
 $(document).ready(function() {
     showLoadingPage();
@@ -25,12 +28,14 @@ $(document).ready(function() {
 
     $("#indicatorSelect").on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
         indicatorIsSelected = true;
+        selectedIndicator = $(this).val();
         if (yearIsSelected) {
             populateData();
         }
     });
     $("#yearSelect").on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
         yearIsSelected = true;
+        selectedYear = $(this).val();
         if (indicatorIsSelected) {
             populateData();
         }
@@ -255,6 +260,21 @@ function setupMap() {
         return div;
     };
     legend.addTo(map);
+
+    info = L.control({position: 'topleft'});
+    info.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    };
+    info.update = function (props) {
+        if (indicatorIsSelected && yearIsSelected) {
+            this._div.innerHTML = selectedIndicator + ', ' + selectedYear;
+        } else {
+            this._div.innerHTML = 'Select an indicator and year';
+        }
+    };
+    info.addTo(map);
 }
 
 function setupTable() {
@@ -267,6 +287,7 @@ function setupTable() {
 
 function updateMap(fakeData) {
     geojson.setStyle(dataStyle);
+    info.update();
 }
 
 function updateTable(fakeData) {

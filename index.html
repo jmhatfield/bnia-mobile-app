@@ -74,12 +74,12 @@
         <!-- the rest -->
         <div class="container-fluid">
             <div class="selectContainer d-flex flex-row align-items-center">
-                <!-- <div class="d-inline-flex numbers mr-2"><strong>1.</strong></div> -->
+                <div class="d-inline-flex numbers mr-2"><strong>1.</strong></div>
                 <select id="indicatorSelect" class="selectpicker form-control d-inline-flex" data-live-search="true" title="Search for an indicator">
                 </select>
             </div>
             <div class="selectContainer d-flex flex-rows align-items-center">
-                <!-- <div class="d-inline-flex numbers mr-2"><strong>2.</strong></div> -->
+                <div class="d-inline-flex numbers mr-2"><strong>2.</strong></div>
                 <select id="yearSelect" class="selectpicker form-control d-inline-flex" title="Choose a year">
                     <option>2017</option>
                     <option>2016</option>
@@ -105,7 +105,7 @@
                 <div class="selectContainer d-flex flex-row">
                     <select id="neighborhoodSelect1" class="selectpicker form-control d-inline-flex" data-live-search="true" data-max-options="1" title="Search for a neighborhood" multiple>
                     </select>
-                    <button class="btn btn-light d-inline-flex ml-1" onclick="unfocusMap()">Clear</button>
+                    <button class="btn btn-light d-inline-flex ml-1" onclick="unfocusMap()">X</button>
                 </div>
                 <div id="mapid" class="selectContainer">
                 </div>
@@ -114,7 +114,7 @@
                 <div class="selectContainer d-flex flex-row">
                     <select id="neighborhoodSelect2" class="selectpicker form-control d-inline-flex" data-live-search="true" data-max-options="1" title="Search for a neighborhood" multiple>
                     </select>
-                    <button class="btn btn-light d-inline-flex ml-1" onclick="unfilterTable()">Clear</button>
+                    <button class="btn btn-light d-inline-flex ml-1" onclick="unfilterTable()">X</button>
                 </div>
                 <table class="table selectContainer">
                     <thead>
